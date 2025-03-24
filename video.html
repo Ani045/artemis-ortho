@@ -3,19 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artemis Hospital - Our Specialists</title>
-    
+    <title>Doctors Carousel</title>
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    
-    <!-- Google Fonts - Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Swiper CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/10.0.0/swiper-bundle.min.css" rel="stylesheet">
     <style>
-        /* Main Variables and Base Styles */
         :root {
             --dark-brown: #664200;
             --medium-brown: #916300;
@@ -23,579 +20,779 @@
         }
         
         body {
+            background-color: #f9f9f9;
             font-family: 'Poppins', sans-serif;
-            color: #333;
-            line-height: 1.6;
+            overflow-x: hidden;
         }
         
-        /* Specialists Section */
-        .artemis-specialists-showcase {
-            background-color: #fff;
-            padding: 100px 0;
+        .doctors-showcase {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--light-cream) 0%, #fff8e1 100%);
             position: relative;
             overflow: hidden;
         }
         
-        .artemis-specialists-showcase::before {
-            content: '';
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background-color: var(--light-cream);
-            top: -150px;
-            right: -150px;
-            opacity: 0.6;
-            z-index: 0;
-        }
-        
-        .artemis-specialists-showcase::after {
-            content: '';
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background-color: var(--light-cream);
-            bottom: -100px;
-            left: -100px;
-            opacity: 0.4;
-            z-index: 0;
-        }
-        
-        /* Header Styling */
-        .artemis-showcase-header {
-            position: relative;
-            margin-bottom: 70px;
-            animation: fadeInUp 1s ease;
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .artemis-showcase-tagline {
-            display: inline-block;
-            color: var(--medium-brown);
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-        }
-        
-        .artemis-showcase-heading {
-            color: var(--dark-brown);
-            font-size: 2.8rem;
-            font-weight: 700;
-            margin-bottom: 25px;
-        }
-        
-        .artemis-divider {
-            position: relative;
-            height: 20px;
-            width: 100%;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .artemis-divider::before, .artemis-divider::after {
-            content: '';
-            height: 1px;
-            background-color: rgba(102, 66, 0, 0.2);
-            width: 80px;
-        }
-        
-        .artemis-divider-icon {
-            width: 40px;
-            height: 40px;
-            background-color: var(--light-cream);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 15px;
-            color: var(--medium-brown);
-            font-size: 1.2rem;
-            position: relative;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(145, 99, 0, 0.3);
-            }
-            70% {
-                box-shadow: 0 0 0 10px rgba(145, 99, 0, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(145, 99, 0, 0);
-            }
-        }
-        
-        .artemis-showcase-intro {
-            color: #555;
-            font-size: 1.05rem;
-            line-height: 1.8;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        /* Specialists Gallery */
-        .artemis-specialists-gallery {
-            position: relative;
-            z-index: 1;
-        }
-        
-        .artemis-specialist-profile {
-            position: relative;
-            margin-bottom: 40px;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards;
-            background-color: #fff;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            transition: all 0.4s ease;
-        }
-        
-        .artemis-specialist-profile:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 20px 40px rgba(102, 66, 0, 0.15);
-        }
-        
-        .col-lg-3:nth-child(1) .artemis-specialist-profile { animation-delay: 0.1s; }
-        .col-lg-3:nth-child(2) .artemis-specialist-profile { animation-delay: 0.3s; }
-        .col-lg-3:nth-child(3) .artemis-specialist-profile { animation-delay: 0.5s; }
-        .col-lg-3:nth-child(4) .artemis-specialist-profile { animation-delay: 0.7s; }
-        .col-lg-3:nth-child(5) .artemis-specialist-profile { animation-delay: 0.9s; }
-        
-        .artemis-specialist-portrait {
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 20px;
-            transition: all 0.5s ease;
-        }
-        
-        .artemis-portrait-wrapper {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.5s ease;
-        }
-        
-        .artemis-portrait-wrapper::before {
-            content: '';
+        .doctors-showcase::before {
+            content: "";
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 50%, rgba(102, 66, 0, 0.8) 100%);
-            opacity: 0;
-            transition: all 0.5s ease;
+            background-image: 
+                radial-gradient(circle at 10% 10%, rgba(145, 99, 0, 0.03) 0%, transparent 60%),
+                radial-gradient(circle at 90% 90%, rgba(145, 99, 0, 0.03) 0%, transparent 60%);
+            z-index: 0;
+        }
+        
+        .doctors-showcase-header {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 2rem;
+        }
+        
+        .doctors-showcase-tagline {
+            color: var(--medium-brown);
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: clamp(0.8rem, 2vw, 1.1rem);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .doctors-showcase-heading {
+            color: var(--dark-brown);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .doctors-showcase-heading::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--medium-brown), var(--dark-brown));
+            border-radius: 3px;
+        }
+        
+        .doctors-divider {
+            position: relative;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        
+        .doctors-divider::before,
+        .doctors-divider::after {
+            content: "";
+            height: 2px;
+            width: 100px;
+            background: linear-gradient(90deg, transparent, var(--medium-brown));
+            position: absolute;
+        }
+        
+        .doctors-divider::before {
+            left: 50%;
+            transform: translateX(-180%);
+        }
+        
+        .doctors-divider::after {
+            right: 50%;
+            transform: translateX(180%);
+            background: linear-gradient(90deg, var(--medium-brown), transparent);
+        }
+        
+        .doctors-divider-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--medium-brown), var(--dark-brown));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-cream);
+            font-size: 1.3rem;
+            z-index: 1;
+            box-shadow: 0 5px 15px rgba(102, 66, 0, 0.3);
+        }
+        
+        .doctors-showcase-intro {
+            color: #666;
+            margin-bottom: 3rem;
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+        
+        .doctors-specialists-swiper {
+            position: relative;
+            padding-bottom: 60px;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .doctor-profile {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+            margin: 0;
+            border: 1px solid rgba(102, 66, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .doctor-profile:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(102, 66, 0, 0.15);
+        }
+        
+        .doctor-portrait {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+        }
+        
+        .doctor-portrait-wrapper {
+            height: 100%;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #f5f5f5, #ffffff);
+        }
+        
+        .doctor-portrait-wrapper::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(102, 66, 0, 0.1), rgba(145, 99, 0, 0.05));
             z-index: 1;
         }
         
-        .artemis-specialist-profile:hover .artemis-portrait-wrapper::before {
-            opacity: 1;
-        }
-        
-        .artemis-portrait-wrapper img {
+        .doctor-portrait-wrapper img {
             width: 100%;
-            height: auto;
-            transition: all 0.8s ease;
-            transform: scale(1);
+            height: 100%;
             object-fit: cover;
+            transition: transform 0.6s ease;
+            filter: contrast(1.05);
         }
         
-        .artemis-specialist-profile:hover .artemis-portrait-wrapper img {
-            transform: scale(1.1);
+        .doctor-profile:hover .doctor-portrait-wrapper img {
+            transform: scale(1.08);
         }
         
-        .artemis-specialist-decoration {
-            position: absolute;
-            top: -5px;
-            left: -5px;
-            width: 100px;
-            height: 100px;
-            border-top: 3px solid var(--medium-brown);
-            border-left: 3px solid var(--medium-brown);
-            border-top-left-radius: 15px;
-            opacity: 0;
-            transition: all 0.5s ease;
-        }
-        
-        .artemis-specialist-profile:hover .artemis-specialist-decoration {
-            opacity: 1;
-            animation: decorationExpand 0.5s ease forwards;
-        }
-        
-        @keyframes decorationExpand {
-            from {
-                width: 30px;
-                height: 30px;
-            }
-            to {
-                width: 60px;
-                height: 60px;
-            }
-        }
-        
-        .artemis-specialist-connects {
-            position: absolute;
-            bottom: 20px;
-            left: 0;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            z-index: 2;
-            transition: all 0.5s ease;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        
-        .artemis-specialist-profile:hover .artemis-specialist-connects {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .artemis-connect-link {
-            width: 35px;
-            height: 35px;
-            background-color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--dark-brown);
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            transform: scale(0);
-        }
-        
-        .artemis-specialist-profile:hover .artemis-connect-link {
-            animation: scaleIn 0.5s ease forwards;
-        }
-        
-        .artemis-specialist-profile:hover .artemis-connect-link:nth-child(1) { animation-delay: 0.1s; }
-        .artemis-specialist-profile:hover .artemis-connect-link:nth-child(2) { animation-delay: 0.2s; }
-        .artemis-specialist-profile:hover .artemis-connect-link:nth-child(3) { animation-delay: 0.3s; }
-        
-        @keyframes scaleIn {
-            from { transform: scale(0); }
-            to { transform: scale(1); }
-        }
-        
-        .artemis-connect-link:hover {
-            background-color: var(--dark-brown);
-            color: white;
-            transform: translateY(-3px);
-        }
-        
-        .artemis-specialist-details {
-            text-align: center;
-            padding: 20px 25px 30px;
-            transition: all 0.5s ease;
-            background-color: #fff;
-        }
-        
-        .artemis-specialist-name {
-            color: var(--dark-brown);
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-            position: relative;
-            padding-bottom: 12px;
-            display: inline-block;
-        }
-        
-        .artemis-specialist-name::after {
-            content: '';
+        .doctor-decoration {
             position: absolute;
             bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 2px;
-            background-color: var(--medium-brown);
-            transition: all 0.5s ease;
+            left: 0;
+            width: 100%;
+            height: 35px;
+            background: linear-gradient(135deg, var(--medium-brown), var(--dark-brown));
+            clip-path: polygon(0 30%, 100% 0, 100% 100%, 0% 100%);
         }
         
-        .artemis-specialist-profile:hover .artemis-specialist-name::after {
-            width: 50px;
-        }
-        
-        .artemis-specialist-role {
-            color: var(--medium-brown);
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            min-height: 50px;
+        .doctor-details {
+            padding: 1.5rem;
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+            background: white;
             display: flex;
-            align-items: center;
-            justify-content: center;
+            flex-direction: column;
+            flex-grow: 1;
         }
         
-        .artemis-btn-group {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
+        .doctor-profile:hover .doctor-details {
+            background: linear-gradient(to bottom, white, var(--light-cream));
         }
         
-        .artemis-consult-btn {
-            flex: 1;
-            display: inline-block;
-            background-color: var(--light-cream);
+        .doctor-name {
             color: var(--dark-brown);
-            padding: 10px 15px;
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+            transition: color 0.3s ease;
+            min-height: 3.5rem;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .doctor-name::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--medium-brown);
+            transition: width 0.3s ease;
+        }
+        
+        .doctor-profile:hover .doctor-name::after {
+            width: 80px;
+        }
+        
+        .doctor-role {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-height: 4.5rem;
+        }
+        
+        .doctor-btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: auto;
+        }
+        
+        .doctor-consult-btn {
+            background: linear-gradient(135deg, var(--medium-brown), var(--dark-brown));
+            color: white;
+            padding: 10px 20px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.4s ease;
-            border: 2px solid var(--light-cream);
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            border: none;
+            box-shadow: 0 5px 15px rgba(102, 66, 0, 0.2);
             text-align: center;
+            flex-grow: 1;
         }
         
-        .artemis-consult-btn:hover {
-            background-color: var(--dark-brown);
-            color: white;
-            border-color: var(--dark-brown);
+        .doctor-consult-btn:hover {
+            background: linear-gradient(135deg, var(--dark-brown), var(--medium-brown));
+            box-shadow: 0 8px 20px rgba(102, 66, 0, 0.3);
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(102, 66, 0, 0.15);
+            color: white;
         }
         
-        .artemis-whatsapp-btn {
+        .doctor-whatsapp-btn {
+            width: 42px;
+            height: 42px;
+            min-width: 42px;
+            border-radius: 50%;
+            background-color: #25D366;
+            color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: #25D366;
-            color: white;
-            border-radius: 50%;
             text-decoration: none;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
             font-size: 1.2rem;
-            transition: all 0.4s ease;
-            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
         }
         
-        .artemis-whatsapp-btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 15px rgba(37, 211, 102, 0.4);
+        .doctor-whatsapp-btn:hover {
+            transform: scale(1.1) rotate(10deg);
             color: white;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+        }
+        
+        /* Swiper Navigation Buttons */
+        .swiper-button-next,
+        .swiper-button-prev {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--medium-brown), var(--dark-brown));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(102, 66, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .swiper-button-next:after,
+        .swiper-button-prev:after {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(102, 66, 0, 0.3);
+        }
+        
+        .swiper-button-next.swiper-button-disabled,
+        .swiper-button-prev.swiper-button-disabled {
+            opacity: 0.3;
+        }
+        
+        /* Swiper Pagination */
+        .swiper-pagination {
+            bottom: 0;
+        }
+        
+        .swiper-pagination-bullet {
+            width: 12px;
+            height: 12px;
+            background-color: var(--medium-brown);
+            opacity: 0.3;
+            transition: all 0.3s ease;
+        }
+        
+        .swiper-pagination-bullet-active {
+            width: 30px;
+            border-radius: 10px;
+            opacity: 1;
+            background: linear-gradient(90deg, var(--medium-brown), var(--dark-brown));
+        }
+        
+        /* Make sure swiper slides don't get squished */
+        .swiper-slide {
+            height: auto;
         }
         
         /* Responsive Adjustments */
-        @media (max-width: 991px) {
-            .artemis-specialists-showcase {
-                padding: 80px 0;
+        @media (max-width: 1199.98px) {
+            .doctors-showcase {
+                padding: 3rem 0;
             }
             
-            .artemis-showcase-heading {
-                font-size: 2.3rem;
-            }
-            
-            .artemis-specialist-profile {
-                max-width: 320px;
-                margin: 0 auto 40px;
-            }
-            
-            .artemis-specialist-role {
-                min-height: 70px;
+            .doctor-portrait {
+                height: 200px;
             }
         }
         
-        @media (max-width: 767px) {
-            .artemis-specialists-showcase {
-                padding: 60px 0;
+        @media (max-width: 991.98px) {
+            .doctors-showcase {
+                padding: 2.5rem 0;
             }
             
-            .artemis-showcase-heading {
-                font-size: 1.8rem;
+            .doctor-profile {
+                max-width: 350px;
+                margin: 0 auto;
             }
             
-            .artemis-showcase-tagline {
-                font-size: 1rem;
+            .swiper-button-next,
+            .swiper-button-prev {
+                width: 40px;
+                height: 40px;
+            }
+        }
+        
+        @media (max-width: 767.98px) {
+            .doctors-showcase {
+                padding: 2rem 0;
             }
             
-            .artemis-divider::before, .artemis-divider::after {
+            .doctors-showcase-intro {
+                margin-bottom: 2rem;
+            }
+            
+            .doctors-divider::before,
+            .doctors-divider::after {
                 width: 60px;
             }
             
-            .artemis-specialist-role {
-                min-height: 80px;
+            .doctors-divider-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+            
+            .doctor-name {
+                min-height: 3rem;
+            }
+            
+            .doctor-role {
+                min-height: 4rem;
+            }
+        }
+        
+        @media (max-width: 575.98px) {
+            .doctors-showcase {
+                padding: 1.5rem 0;
+            }
+            
+            .doctors-showcase-header {
+                margin-bottom: 1rem;
+            }
+            
+            .doctors-divider {
+                margin: 1.5rem 0;
+            }
+            
+            .doctor-portrait {
+                height: 180px;
+            }
+            
+            .doctor-details {
+                padding: 1.2rem;
+            }
+            
+            .doctor-consult-btn {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .doctor-whatsapp-btn {
+                width: 38px;
+                height: 38px;
+                min-width: 38px;
+                font-size: 1.1rem;
+            }
+            
+            .swiper-button-next,
+            .swiper-button-prev {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .swiper-button-next:after,
+            .swiper-button-prev:after {
+                font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Artemis Doctors/Specialists Section -->
-    <section class="artemis-specialists-showcase py-5">
+    <section class="doctors-showcase">
         <div class="container">
-            <!-- Section Header -->
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center">
-                    <div class="artemis-showcase-header">
-                        <span class="artemis-showcase-tagline">Expert Medical Team</span>
-                        <h2 class="artemis-showcase-heading">Our Distinguished Cardiologists</h2>
-                        <div class="artemis-divider">
-                            <span class="artemis-divider-icon"><i class="bi bi-heart-pulse"></i></span>
+                    <div class="doctors-showcase-header">
+                        <span class="doctors-showcase-tagline">Our Dedicated Team: Your Heart Care Experts</span>
+                        <h2 class="doctors-showcase-heading">Meet Our Team of Leading Heart Specialists</h2>
+                        <div class="doctors-divider">
+                            <span class="doctors-divider-icon"><i class="bi bi-heart-pulse"></i></span>
                         </div>
-                        <p class="artemis-showcase-intro">Bringing together years of specialized experience and international training to provide exceptional cardiac care with compassion and dedication.</p>
+                        <p class="doctors-showcase-intro">Bringing together years of specialized experience and
+                            international training to provide exceptional cardiac care with compassion and dedication.
+                        </p>
                     </div>
                 </div>
             </div>
-            
-            <!-- Doctors Gallery -->
-            <div class="row artemis-specialists-gallery">
-                <!-- Specialist 1 -->
-                <div class="col-lg-3 col-md-6">
-                    <div class="artemis-specialist-profile">
-                        <div class="artemis-specialist-portrait">
-                            <div class="artemis-portrait-wrapper">
-                                <img src="assets/images/Amit.png" alt="Dr. Amit Kumar Chaurasia">
+
+            <div class="swiper doctors-specialists-swiper">
+                <div class="swiper-wrapper">
+                    <!-- Specialist 1 -->
+                    <div class="swiper-slide">
+                        <div class="doctor-profile">
+                            <div class="doctor-portrait">
+                                <div class="doctor-portrait-wrapper">
+                                    <img src="/api/placeholder/400/320" alt="Dr. Rohit Lamba">
+                                </div>
+                                <div class="doctor-decoration"></div>
                             </div>
-                            <div class="artemis-specialist-decoration"></div>
-                            <div class="artemis-specialist-connects">
-                                <a href="#" class="artemis-connect-link"><i class="bi bi-facebook"></i></a>
-                                <a href="#" class="artemis-connect-link"><i class="bi bi-twitter"></i></a>
-                                <a href="#" class="artemis-connect-link"><i class="bi bi-linkedin"></i></a>
+                            <div class="doctor-details">
+                                <h3 class="doctor-name">Dr. Rohit Lamba</h3>
+                                <div class="doctor-role">Chairperson Adult Cardiac Surgery & Heart Lung Transplant</div>
+                                <div class="doctor-btn-group">
+                                    <a href="#form" class="doctor-consult-btn">Book Appointment</a>
+                                    <a href="https://wa.me/919599285476" class="doctor-whatsapp-btn">
+                                        <i class="bi bi-whatsapp"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                        <div class="artemis-specialist-details">
-                            <h3 class="artemis-specialist-name">Dr. Amit Kumar Chaurasia</h3>
-                            <div class="artemis-specialist-role">Chief Cath Lab & TAVI (Unit I)</div>
-                            <div class="artemis-btn-group">
-                                <a href="#" class="artemis-consult-btn">Schedule Consultation</a>
-                                <a href="https://wa.me/919182900217" class="artemis-whatsapp-btn">
-                                    <i class="bi bi-whatsapp"></i>
-                                </a>
+                    </div>
+
+                    <!-- Specialist 2 -->
+                    <div class="swiper-slide">
+                        <div class="doctor-profile">
+                            <div class="doctor-portrait">
+                                <div class="doctor-portrait-wrapper">
+                                    <img src="/api/placeholder/400/320" alt="Dr. Ramkinkar Jha">
+                                </div>
+                                <div class="doctor-decoration"></div>
+                            </div>
+                            <div class="doctor-details">
+                                <h3 class="doctor-name">Dr. Ramkinkar Jha</h3>
+                                <div class="doctor-role">Chief & Unit Head - Orthopaedics (Unit III)</div>
+                                <div class="doctor-btn-group">
+                                    <a href="#form" class="doctor-consult-btn">Book Appointment</a>
+                                    <a href="https://wa.me/919599285476" class="doctor-whatsapp-btn">
+                                        <i class="bi bi-whatsapp"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Specialist 3 -->
+                    <div class="swiper-slide">
+                        <div class="doctor-profile">
+                            <div class="doctor-portrait">
+                                <div class="doctor-portrait-wrapper">
+                                    <img src="/api/placeholder/400/320" alt="Dr. I P S Oberoi">
+                                </div>
+                                <div class="doctor-decoration"></div>
+                            </div>
+                            <div class="doctor-details">
+                                <h3 class="doctor-name">Dr. I P S Oberoi</h3>
+                                <div class="doctor-role">Chairperson - Orthopaedics Program & Chief – Robotic Joint Replacement</div>
+                                <div class="doctor-btn-group">
+                                    <a href="#form" class="doctor-consult-btn">Book Appointment</a>
+                                    <a href="https://wa.me/919599285476" class="doctor-whatsapp-btn">
+                                        <i class="bi bi-whatsapp"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Specialist 4 -->
+                    <div class="swiper-slide">
+                        <div class="doctor-profile">
+                            <div class="doctor-portrait">
+                                <div class="doctor-portrait-wrapper">
+                                    <img src="/api/placeholder/400/320" alt="Dr. Sanjay Sarup">
+                                </div>
+                                <div class="doctor-decoration"></div>
+                            </div>
+                            <div class="doctor-details">
+                                <h3 class="doctor-name">Dr. Sanjay Sarup</h3>
+                                <div class="doctor-role">Head – Orthopaedics (Unit-II) and Chief – Paediatric Orthopaedics</div>
+                                <div class="doctor-btn-group">
+                                    <a href="#form" class="doctor-consult-btn">Book Appointment</a>
+                                    <a href="https://wa.me/919599285476" class="doctor-whatsapp-btn">
+                                        <i class="bi bi-whatsapp"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Specialist 5 -->
+                    <div class="swiper-slide">
+                        <div class="doctor-profile">
+                            <div class="doctor-portrait">
+                                <div class="doctor-portrait-wrapper">
+                                    <img src="/api/placeholder/400/320" alt="Dr. Ravi Sauhta">
+                                </div>
+                                <div class="doctor-decoration"></div>
+                            </div>
+                            <div class="doctor-details">
+                                <h3 class="doctor-name">Dr. (Prof.) Ravi Sauhta</h3>
+                                <div class="doctor-role">Chief and HOD Orthopaedics & Joint Replacement (Unit VI)</div>
+                                <div class="doctor-btn-group">
+                                    <a href="#form" class="doctor-consult-btn">Book Appointment</a>
+                                    <a href="https://wa.me/919599285476" class="doctor-whatsapp-btn">
+                                        <i class="bi bi-whatsapp"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Specialist 6 -->
+                    <div class="swiper-slide">
+                        <div class="doctor-profile">
+                            <div class="doctor-portrait">
+                                <div class="doctor-portrait-wrapper">
+                                    <img src="/api/placeholder/400/320" alt="Dr. Hitesh Garg">
+                                </div>
+                                <div class="doctor-decoration"></div>
+                            </div>
+                            <div class="doctor-details">
+                                <h3 class="doctor-name">Dr. Hitesh Garg</h3>
+                                <div class="doctor-role">Head - Ortho Spine Surgery</div>
+                                <div class="doctor-btn-group">
+                                    <a href="#form" class="doctor-consult-btn">Book Appointment</a>
+                                    <a href="https://wa.me/919599285476" class="doctor-whatsapp-btn">
+                                        <i class="bi bi-whatsapp"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Specialist 7 -->
+                    <div class="swiper-slide">
+                        <div class="doctor-profile">
+                            <div class="doctor-portrait">
+                                <div class="doctor-portrait-wrapper">
+                                    <img src="/api/placeholder/400/320" alt="Dr. Sandeep Chauhan">
+                                </div>
+                                <div class="doctor-decoration"></div>
+                            </div>
+                            <div class="doctor-details">
+                                <h3 class="doctor-name">Dr. Sandeep Chauhan</h3>
+                                <div class="doctor-role">Sr. Consultant - Orthopaedics (Unit III)</div>
+                                <div class="doctor-btn-group">
+                                    <a href="#form" class="doctor-consult-btn">Book Appointment</a>
+                                    <a href="https://wa.me/919599285476" class="doctor-whatsapp-btn">
+                                        <i class="bi bi-whatsapp"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Specialist 8 -->
+                    <div class="swiper-slide">
+                        <div class="doctor-profile">
+                            <div class="doctor-portrait">
+                                <div class="doctor-portrait-wrapper">
+                                    <img src="/api/placeholder/400/320" alt="Dr. Devendra Singh Solanki">
+                                </div>
+                                <div class="doctor-decoration"></div>
+                            </div>
+                            <div class="doctor-details">
+                                <h3 class="doctor-name">Dr. Devendra Singh Solanki</h3>
+                                <div class="doctor-role">Unit Head - Orthopaedics (Unit I)</div>
+                                <div class="doctor-btn-group">
+                                    <a href="#form" class="doctor-consult-btn">Book Appointment</a>
+                                    <a href="https://wa.me/919599285476" class="doctor-whatsapp-btn">
+                                        <i class="bi bi-whatsapp"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Specialist 9 -->
+                    <div class="swiper-slide">
+                        <div class="doctor-profile">
+                            <div class="doctor-portrait">
+                                <div class="doctor-portrait-wrapper">
+                                    <img src="/api/placeholder/400/320" alt="Dr. Vipin Maheshwari">
+                                </div>
+                                <div class="doctor-decoration"></div>
+                            </div>
+                            <div class="doctor-details">
+                                <h3 class="doctor-name">Dr. Vipin Maheshwari</h3>
+                                <div class="doctor-role">Sr. Consultant - Orthopaedics (Unit II)</div>
+                                <div class="doctor-btn-group">
+                                    <a href="#form" class="doctor-consult-btn">Book Appointment</a>
+                                    <a href="https://wa.me/919599285476" class="doctor-whatsapp-btn">
+                                        <i class="bi bi-whatsapp"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Specialist 10 -->
+                    <div class="swiper-slide">
+                        <div class="doctor-profile">
+                            <div class="doctor-portrait">
+                                <div class="doctor-portrait-wrapper">
+                                    <img src="/api/placeholder/400/320" alt="Dr. Devendra Yadav">
+                                </div>
+                                <div class="doctor-decoration"></div>
+                            </div>
+                            <div class="doctor-details">
+                                <h3 class="doctor-name">Dr. Devendra Yadav</h3>
+                                <div class="doctor-role">Sr. Consultant - Orthopaedics (Unit VI)</div>
+                                <div class="doctor-btn-group">
+                                    <a href="#form" class="doctor-consult-btn">Book Appointment</a>
+                                    <a href="https://wa.me/919599285476" class="doctor-whatsapp-btn">
+                                        <i class="bi bi-whatsapp"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Specialist 2 -->
-                <div class="col-lg-3 col-md-6">
-                    <div class="artemis-specialist-profile">
-                        <div class="artemis-specialist-portrait">
-                            <div class="artemis-portrait-wrapper">
-                                <img src="assets/images/Kul.png" alt="Dr. Kuldeep Arora">
-                            </div>
-                            <div class="artemis-specialist-decoration"></div>
-                            <div class="artemis-specialist-connects">
-                                <a href="#" class="artemis-connect-link"><i class="bi bi-facebook"></i></a>
-                                <a href="#" class="artemis-connect-link"><i class="bi bi-twitter"></i></a>
-                                <a href="#" class="artemis-connect-link"><i class="bi bi-linkedin"></i></a>
-                            </div>
-                        </div>
-                        <div class="artemis-specialist-details">
-                            <h3 class="artemis-specialist-name">Dr. Kuldeep Arora</h3>
-                            <div class="artemis-specialist-role">Unit Head & Chief Cath Lab (Unit II)</div>
-                            <div class="artemis-btn-group">
-                                <a href="#" class="artemis-consult-btn">Schedule Consultation</a>
-                                <a href="https://wa.me/919182900217" class="artemis-whatsapp-btn">
-                                    <i class="bi bi-whatsapp"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Specialist 3 -->
-                <div class="col-lg-3 col-md-6">
-                    <div class="artemis-specialist-profile">
-                        <div class="artemis-specialist-portrait">
-                            <div class="artemis-portrait-wrapper">
-                                <img src="assets/images/Sameer.png" alt="Dr. Sameer Mehrotra">
-                            </div>
-                            <div class="artemis-specialist-decoration"></div>
-                            <div class="artemis-specialist-connects">
-                                <a href="#" class="artemis-connect-link"><i class="bi bi-facebook"></i></a>
-                                <a href="#" class="artemis-connect-link"><i class="bi bi-twitter"></i></a>
-                                <a href="#" class="artemis-connect-link"><i class="bi bi-linkedin"></i></a>
-                            </div>
-                        </div>
-                        <div class="artemis-specialist-details">
-                            <h3 class="artemis-specialist-name">Dr. Sameer Mehrotra</h3>
-                            <div class="artemis-specialist-role">Unit Chief Electrophysiology and Chief Cath Lab - (Unit III)</div>
-                            <div class="artemis-btn-group">
-                                <a href="#" class="artemis-consult-btn">Schedule Consultation</a>
-                                <a href="https://wa.me/919182900217" class="artemis-whatsapp-btn">
-                                    <i class="bi bi-whatsapp"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Specialist 4 -->
-                <div class="col-lg-3 col-md-6">
-                    <div class="artemis-specialist-profile">
-                        <div class="artemis-specialist-portrait">
-                            <div class="artemis-portrait-wrapper">
-                                <img src="assets/images/Rahul.png" alt="Dr. Rahul Mehrotra">
-                            </div>
-                            <div class="artemis-specialist-decoration"></div>
-                            <div class="artemis-specialist-connects">
-                                <a href="#" class="artemis-connect-link"><i class="bi bi-facebook"></i></a>
-                                <a href="#" class="artemis-connect-link"><i class="bi bi-twitter"></i></a>
-                                <a href="#" class="artemis-connect-link"><i class="bi bi-linkedin"></i></a>
-                            </div>
-                        </div>
-                        <div class="artemis-specialist-details">
-                            <h3 class="artemis-specialist-name">Dr. Rahul Mehrotra</h3>
-                            <div class="artemis-specialist-role">Chief NIC & Clinical Cardiology (Unit IV)</div>
-                            <div class="artemis-btn-group">
-                                <a href="#" class="artemis-consult-btn">Schedule Consultation</a>
-                                <a href="https://wa.me/919182900217" class="artemis-whatsapp-btn">
-                                    <i class="bi bi-whatsapp"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Specialist 5 -->
-                <div class="col-lg-3 col-md-6 mx-auto">
-                    <div class="artemis-specialist-profile">
-                        <div class="artemis-specialist-portrait">
-                            <div class="artemis-portrait-wrapper">
-                                <img src="assets/images/Sus.png" alt="Dr. Sushant Srivastava">
-                            </div>
-                            <div class="artemis-specialist-decoration"></div>
-                            <div class="artemis-specialist-connects">
-                                <a href="#" class="artemis-connect-link"><i class="bi bi-facebook"></i></a>
-                                <a href="#" class="artemis-connect-link"><i class="bi bi-twitter"></i></a>
-                                <a href="#" class="artemis-connect-link"><i class="bi bi-linkedin"></i></a>
-                            </div>
-                        </div>
-                        <div class="artemis-specialist-details">
-                            <h3 class="artemis-specialist-name">Dr. Sushant Srivastava</h3>
-                            <div class="artemis-specialist-role">Chairperson Adult Cardiac Surgery & Heart Lung Transplant</div>
-                            <div class="artemis-btn-group">
-                                <a href="#" class="artemis-consult-btn">Schedule Consultation</a>
-                                <a href="https://wa.me/919182900217" class="artemis-whatsapp-btn">
-                                    <i class="bi bi-whatsapp"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!-- Navigation buttons -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <!-- Pagination -->
+                <div class="swiper-pagination"></div>
             </div>
         </div>
     </section>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+    <!-- Swiper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/10.0.0/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Swiper
+            const swiper = new Swiper('.doctors-specialists-swiper', {
+                // Default is one slide per view (for mobile)
+                slidesPerView: 1,
+                spaceBetween: 20,
+                loop: true,
+                grabCursor: true,
+                // Disable centered slides to allow multiple cards per row
+                centeredSlides: false,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                    dynamicBullets: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                // Responsive breakpoints with more slides per view
+                breakpoints: {
+                    // when window width is >= 576px
+                    576: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                        centeredSlides: false,
+                    },
+                    // when window width is >= 768px
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 30,
+                        centeredSlides: false,
+                    },
+                    // when window width is >= 992px
+                    992: {
+                        slidesPerView: 3,
+                        spaceBetween: 30,
+                        centeredSlides: false,
+                    },
+                    // when window width is >= 1200px
+                    1200: {
+                        slidesPerView: 4,
+                        spaceBetween: 30,
+                        centeredSlides: false,
+                    }
+                },
+                // Add a11y features for better accessibility
+                a11y: {
+                    prevSlideMessage: 'Previous slide',
+                    nextSlideMessage: 'Next slide',
+                },
+                keyboard: {
+                    enabled: true,
+                },
+                // Make the carousel more responsive
+                observer: true,
+                observeParents: true,
+            });
+
+            // Add resize listener to refresh swiper when window resizes
+            window.addEventListener('resize', function() {
+                swiper.update();
+            });
+        });
+    </script>
